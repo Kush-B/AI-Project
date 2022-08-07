@@ -1,5 +1,4 @@
 # emotion_detection.py
-from cv2 import imshow
 import keras
 import tensorflow
 import cv2
@@ -14,7 +13,7 @@ obj = DeepFace.analyze(img_path="data/frame37.jpg",
                        actions=['age', 'gender', 'race', 'emotion'])
 print("printing the result")
 print(obj)
-imshow("image", image)
+cv2.imshow("image", image)
 # print(tensorflow.__version__)
 # print(keras.__version__)
 
