@@ -1,4 +1,3 @@
-# emotion_detection.py
 from webbrowser import get
 import keras
 import tensorflow
@@ -8,10 +7,12 @@ from deepface import DeepFace
 import numpy as np  # this will be used later in the process
 
 
-cap = cv2.VideoCapture('2.mp4')
+cap = cv2.VideoCapture(0)
+
 while True:
     frame = cap.read()
-    result = DeepFace.analyze(frame, actions=['emotion'])
+
+    result = DeepFace.analyze(frame)
     faceCascade = cv2.CascadeClassifier(
         cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -22,6 +23,7 @@ while True:
         cv2.putText(frame, result, (25, 25), font,
                     1, (0, 255, 0), 2, cv2.LINE_4)
         cv2.imshow("video", frame)
+
         if cv2.waitKey(2) & 0xFF == ord('q'):
             break
     cap.release()

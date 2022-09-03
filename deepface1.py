@@ -6,10 +6,8 @@ import cv2
 import os
 from deepface import DeepFace
 import numpy as np  # this will be used later in the process
-
-
 # put the image where this file is located and put its name here
-imgpath = 'humans/1 (477).jpg'
+imgpath = 'humans/friends.jpg'
 image = cv2.imread(imgpath)
 # ---------------------------------------------------
 # for checking the image size:
@@ -31,7 +29,7 @@ dim = (width, height)
 
 # print('Original Dimensions : ',img.shape)
 if height > 1080 and width > 920:
-    scale_percent = 50  # percent of original size
+    scale_percent = 25  # percent of original size
     width = int(image.shape[1] * scale_percent / 100)
     height = int(image.shape[0] * scale_percent / 100)
     dim = (width, height)
@@ -51,7 +49,7 @@ faceCascade = cv2.CascadeClassifier(
     cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
 gray = cv2.cvtColor(resized, cv2.COLOR_BGR2GRAY)
-faces = faceCascade.detectMultiScale(gray, 1.1, 4)
+faces = faceCascade.detectMultiScale(gray, 1.5, 3)
 font = cv2.FONT_HERSHEY_COMPLEX
 # to retrive multiple values from keys
 
