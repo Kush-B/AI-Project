@@ -1,9 +1,11 @@
 # Importing all necessary libraries
+from asyncio.windows_events import NULL
 import cv2
 import os
 
 # Read the video from specified path
-cam = cv2.VideoCapture("1.mp4")
+cam = cv2.VideoCapture(
+    'C:/Users/bhard/OneDrive/Desktop/AI/Project/AI-Project/1.mp4')
 
 try:
 
@@ -17,16 +19,17 @@ except OSError:
 
 # frame
 currentframe = 0
-
+counter = 0
 while(True):
 
     # reading from frame
     ret, frame = cam.read()
 
-    if ret:
+    if ret and counter % 30 == 0:
         # if video is still left continue creating images
         name = './data/frame' + str(currentframe) + '.jpg'
         print('Creating...' + name)
+        print(counter)
 
         # writing the extracted images
         cv2.imwrite(name, frame)
@@ -34,9 +37,7 @@ while(True):
         # increasing counter so that it will
         # show how many frames are created
         currentframe += 1
-    else:
-        break
-
-# Release all space and windows once done
-cam.release()
-cv2.destroyAllWindows()
+    elif (ret == NULL):
+        cam.release()
+        cv2.destroyAllWindows()
+    counter += 1
